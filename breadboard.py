@@ -223,6 +223,26 @@ resistorButtonY = -50
 
 resistors = pygame.sprite.Group()
 
+class Diode(pygame.sprite.Sprite):
+    def __init__(self,x1,y1,value):
+        super(Diode,self).__init__()
+        self.surface = screen
+        self.value = value
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x1 + distanceBetweenHoles*2
+        self.y2 = y1 
+        self.rectY = self.y1-distanceBetweenHoles/4
+        #function to calculate resistor values
+    def update(self):
+        #draw wire line
+        self.line = pygame.draw.line(self.surface, (100,100,100), (self.x1, self.y1), (self.x2, self.y2), 10)
+        rectangle = pygame.Rect(self.x1+distanceBetweenHoles/3, self.rectY,distanceBetweenHoles*1.333,distanceBetweenHoles/2)
+        pygame.draw.rect(screen,(255,255,255),rectangle)
+        #draw lines for cathode
+        pygame.draw.line(self.surface, (0,0,0), (self.x1+distanceBetweenHoles/2, self.rectY), (self.x1+distanceBetweenHoles/2, self.rectY+distanceBetweenHoles/2), 5)
+        
+
 class LED(pygame.sprite.Sprite):
     def __init__(self,x,y,color):
         super(LED,self).__init__()
